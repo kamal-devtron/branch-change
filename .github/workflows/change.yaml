@@ -30,8 +30,9 @@ jobs:
 
         if[ "$TARGET_BRANCH" != "main" ]
         then
+          echo "Target Branch is not main"
           exit 0
-          echo "Bhai Branch dekh le"
+          
         fi  
 
 
