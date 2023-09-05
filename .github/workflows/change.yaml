@@ -5,7 +5,7 @@ on:
     types:
       - opened
       - synchronize
-      - updated
+      - updated3
       - edited
       - reopened
 
@@ -22,6 +22,11 @@ jobs:
         # Set the new target branch name
         echo $GITHUB_REF
         token=${{ secrets.TOKEN }}
+        PR_DATA=$(curl -s -H "Authorization: Bearer ${{ secrets.TOKEN }}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}")
+
+        TARGET_BRANCH=$(echo "$PR_DATA" | jq -r '.base.ref')
+        echo "Target Branch: $TARGET_BRANCH"    
 
         curl -L -X PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"  -H "Authorization: Bearer $token" \
          https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/${{ github.event.pull_request.number }} -d '{"base": "${{ secrets.TARGET_BRANCH }}"}'
