@@ -22,7 +22,7 @@ jobs:
         # Set the new target branch name
         echo $GITHUB_REF
         token=${{ secrets.TOKEN }}
-        git remote add originpass https://kamal-devtron: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@github.com/kamal-devtron/branch-change.git
+        git remote add originpass https://kamal-devtron:${{ secrets.TOKEN }}@github.com/kamal-devtron/branch-change.git
         branch_hash=$(git ls-remote --heads https://github.com/kamal-devtron/branch-change.git refs/heads/$TARGET_BRANCH)
         if [[ -z $branch_hash ]]; then echo "Branch doesn't exist, creating now"; git checkout -b $TARGET_BRANCH; git push originpass $TARGET_BRANCH; fi 
         PR_DATA=$(curl -s -H "Authorization: Bearer ${{ secrets.TOKEN }}" \
