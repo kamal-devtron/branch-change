@@ -22,11 +22,8 @@ jobs:
         # Set the new target branch name
         echo $GITHUB_REF
         token=${{ secrets.TOKEN }}
-        if git ls-remote --heads https://github.com/kamal-devtron/branch-change.git refs/heads/release-candidate >/dev/null 2>&1; then
-          echo "Branch Exsist"
-        else
-          exit 1
-        fi  
+        branch_hash=$(git ls-remote --heads https://github.com/kamal-devtron/branch-change.git refs/heads/release-candidate)
+        if [[ -z $branch_hash ]]; then echo "No hash"; exit 1; fi 
         PR_DATA=$(curl -s -H "Authorization: Bearer ${{ secrets.TOKEN }}" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}")
 
