@@ -32,6 +32,7 @@ jobs:
         then
           exit 0
           echo "Bhai Branch dekh le"
+        fi  
 
 
         curl -L -X PATCH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"  -H "Authorization: Bearer $token" \
