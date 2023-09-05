@@ -21,6 +21,7 @@ jobs:
       run: |
         # Set the new target branch name
         echo $GITHUB_REF
+        echo "Kamal"
         token=${{ secrets.TOKEN }}
         if git ls-remote --heads https://github.com/kamal-devtron/branch-change.git refs/heads/release-candidate >/dev/null 2>&1; then
           echo "Branch Exsist"
