@@ -22,8 +22,6 @@ jobs:
         # Set the new target branch name
         echo $GITHUB_REF
         token=${{ secrets.TOKEN }}
-        git clone https://kamal-devtron:${{ secrets.TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
-        cd branch-change
         branch_hash=$(git ls-remote --heads https://github.com/${GITHUB_REPOSITORY}.git refs/heads/$TARGET_BRANCH)
         echo https://kamal-devtron:${token}@github.com/${GITHUB_REPOSITORY}
         if [[ -z $branch_hash ]]; then echo "Branch doesn't exist, creating now"; git checkout -b $TARGET_BRANCH; git push git push https://kamal-devtron:${token}@github.com/${GITHUB_REPOSITORY} $TARGET_BRANCH $TARGET_BRANCH; fi 
