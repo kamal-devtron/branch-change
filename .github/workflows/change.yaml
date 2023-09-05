@@ -22,6 +22,11 @@ jobs:
         # Set the new target branch name
         echo $GITHUB_REF
         token=${{ secrets.TOKEN }}
+        if git rev-parse --verify origin/release-candidate >/dev/null 2>&1; then
+          echo "Branch Exsist"
+        else
+          exit 1
+        fi  
         PR_DATA=$(curl -s -H "Authorization: Bearer ${{ secrets.TOKEN }}" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}")
 
