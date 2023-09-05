@@ -25,7 +25,8 @@ jobs:
         git clone https://kamal-devtron:${{ secrets.TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
         cd branch-change
         branch_hash=$(git ls-remote --heads https://github.com/${GITHUB_REPOSITORY}.git refs/heads/$TARGET_BRANCH)
-        if [[ -z $branch_hash ]]; then echo "Branch doesn't exist, creating now"; git checkout -b $TARGET_BRANCH; git push origin $TARGET_BRANCH; fi 
+        echo https://kamal-devtron:${token}@github.com/${GITHUB_REPOSITORY}
+        if [[ -z $branch_hash ]]; then echo "Branch doesn't exist, creating now"; git checkout -b $TARGET_BRANCH; git push git push https://kamal-devtron:${token}@github.com/${GITHUB_REPOSITORY} $TARGET_BRANCH $TARGET_BRANCH; fi 
         PR_DATA=$(curl -s -H "Authorization: Bearer ${{ secrets.TOKEN }}" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}")
 
