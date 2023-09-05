@@ -22,8 +22,10 @@ jobs:
         # Set the new target branch name
         echo $GITHUB_REF
         token=${{ secrets.TOKEN }}
+        git clone https://kamal-devtron:${{ secrets.TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+        cd ${GITHUB_REPOSITORY}
         branch_hash=$(git ls-remote --heads https://github.com/${GITHUB_REPOSITORY}.git refs/heads/$TARGET_BRANCH)
-        if [[ -z $branch_hash ]]; then echo "Branch doesn't exist, creating now"; git checkout -b $TARGET_BRANCH; git push https://kamal-devtron:${token}@github.com/${GITHUB_REPOSITORY} $TARGET_BRANCH; fi 
+        if [[ -z $branch_hash ]]; then echo "Branch doesn't exist, creating now"; git checkout -b $TARGET_BRANCH; git push origin $TARGET_BRANCH; fi 
         PR_DATA=$(curl -s -H "Authorization: Bearer ${{ secrets.TOKEN }}" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}")
 
