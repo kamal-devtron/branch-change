@@ -28,7 +28,7 @@ jobs:
         TARGET_BRANCH=$(echo "$PR_DATA" | jq -r '.base.ref')
         echo "Target Branch: $TARGET_BRANCH"    
 
-        if[ "$TARGET_BRANCH" != "main" ]
+        if [[ "$TARGET_BRANCH" != "main" ]]
         then
           exit 0
           echo "Bhai Branch dekh le"
